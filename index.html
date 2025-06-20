@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up - EcoLife</title>
+</head>
+<body>
+  <h2>EcoLife Sign Up</h2>
+  <input id="email" type="email" placeholder="Email"><br>
+  <input id="password" type="password" placeholder="Password"><br>
+  <button onclick="signup()">Sign Up</button>
+
+  <script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDW5APPZMu-lojVRNg89ZDBEY14YD77xd4",
+      authDomain: "ecolife--v1.firebaseapp.com",
+      databaseURL: "https://ecolife--v1-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "ecolife--v1",
+      storageBucket: "ecolife--v1.firebasestorage.app",
+      messagingSenderId: "155183147180",
+      appId: "1:155183147180:web:41acb23fad3af387ea1709",
+      measurementId: "G-KJG7VTYZ26"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+
+    // Signup function
+    window.signup = function () {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          alert("Signup successful! 🎉");
+          // You can redirect here if you want:
+          // window.location.href = "dashboard.html";
+        })
+        .catch((error) => {
+          alert("Signup error: " + error.message);
+        });
+    };
+  </script>
+</body>
+</html>
